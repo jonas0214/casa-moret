@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cafe-primary: #bf6d3a;
+  --color-cafe-secondary: #1e3026;
+  --color-cafe-accent: #3d5a4a;
+  --color-cafe-light: #f4f1ea;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Montserrat", sans-serif;
+}
+
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+  body {
+    font-family: var(--font-sans);
+    @apply text-gray-800 bg-white;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block px-10 py-4 bg-cafe-primary text-white font-semibold rounded transition-colors hover:bg-cafe-primary/90;
+  }
+  .btn-outline {
+    @apply inline-block px-8 py-3 border-2 border-cafe-secondary text-cafe-secondary font-semibold transition-colors hover:bg-cafe-secondary hover:text-white;
+  }
+  .section-padding {
+    @apply py-20;
+  }
+}

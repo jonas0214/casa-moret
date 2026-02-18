@@ -16,8 +16,8 @@
             <input type="hidden" name="reference" value="{{ $orderNumber }}" />
             
             {{-- URLs de Redirección --}}
-            {{-- Cambiamos temporalmente a un dominio ficticio para evitar el bloqueo 403 de CloudFront (Wompi) en local --}}
-            <input type="hidden" name="redirect-url" value="https://mipasteleriaficticia.com/pedido-exitoso" />
+            {{-- URL de redirección al dominio real en Hostinger --}}
+            <input type="hidden" name="redirect-url" value="https://injoepropuesta2.online/pedido-exitoso" />
             
             {{-- Datos del Cliente (Opcional en Widget pero recomendado) --}}
             <input type="hidden" name="customer-data:email" value="{{ $customer['email'] ?? '' }}" />

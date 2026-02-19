@@ -27,9 +27,20 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('order_number')
                             ->disabled()
                             ->label('Número de Pedido'),
-                        Forms\Components\TextInput::make('status')
+                        Forms\Components\Select::make('status')
+                            ->options([
+                                'pending' => 'Pendiente',
+                                'processing' => 'Procesando',
+                                'completed' => 'Completado',
+                                'cancelled' => 'Cancelado',
+                            ])
                             ->label('Estado del Pedido'),
-                        Forms\Components\TextInput::make('payment_status')
+                        Forms\Components\Select::make('payment_status')
+                            ->options([
+                                'unpaid' => 'No pagado',
+                                'paid' => 'Pagado',
+                                'failed' => 'Fallido',
+                            ])
                             ->label('Estado del Pago'),
                         Forms\Components\TextInput::make('total_amount')
                             ->numeric()
@@ -142,6 +153,7 @@ class OrderResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -162,6 +174,7 @@ class OrderResource extends Resource
         return [
             'index' => Pages\ListOrders::route('/'),
             'view' => Pages\ViewOrder::route('/{record}'),
+            'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
     }
 }

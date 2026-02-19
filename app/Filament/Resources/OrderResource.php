@@ -75,7 +75,7 @@ class OrderResource extends Resource
                                     ->disabled(),
                                 Forms\Components\TextInput::make('price_at_time')
                                     ->label('Precio Unitario')
-                                    ->money('COP')
+                                    ->prefix('$')
                                     ->disabled(),
                             ])
                             ->columns(3)

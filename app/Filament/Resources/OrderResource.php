@@ -160,7 +160,11 @@ class OrderResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('created_at', 'desc');
+            ->defaultSort('created_at', 'desc')
+            ->recordClasses(fn (Order $record) => match (true) {
+                $record->payment_status === 'paid' && $record->status !== 'completed' => 'bg-success-500/10 border-l-4 border-success-500 animate-pulse',
+                default => null,
+            });
     }
 
     public static function getRelations(): array

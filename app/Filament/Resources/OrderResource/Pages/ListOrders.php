@@ -17,10 +17,14 @@ class ListOrders extends ListRecords
         return [];
     }
 
+    public function getDefaultActiveTab(): string | int | null
+    {
+        return 'pendientes_envio';
+    }
+
     public function getTabs(): array
     {
         return [
-            'todos' => Tab::make('Todos los Pedidos'),
             'pendientes_envio' => Tab::make('Pendientes de Envío')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('payment_status', 'paid')->where('status', '!=', 'completed'))
                 ->badge(fn () => \App\Models\Order::where('payment_status', 'paid')->where('status', '!=', 'completed')->count())

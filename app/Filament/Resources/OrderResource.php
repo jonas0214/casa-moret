@@ -162,7 +162,7 @@ class OrderResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->recordClasses(fn (Order $record) => match (true) {
-                $record->payment_status === 'paid' && $record->status !== 'completed' => 'bg-success-500/10 border-l-4 border-success-500 animate-pulse',
+                $record->payment_status === 'paid' && $record->status === 'pending' => 'bg-success-500/10 border-l-4 border-success-500 animate-pulse',
                 default => null,
             });
     }

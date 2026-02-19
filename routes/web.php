@@ -21,5 +21,21 @@ Route::get('/checkout/redirect', function() {
         return redirect()->route('shop.index');
     }
 
+    // Asegurar que la firma se genere siempre con el secreto correcto y sin decimales
+    $amountInCents = (int)round($data['total'] * 100);
+    $currency = 'COP';
+    $integritySecret = config('services.wompi.integrity_key');
+    $orderNumber = $data['orderNumber'];
+    
+    // El orden de concatenación es crítico: Referencia + MontoEnCentavos + Moneda + Secreto
+    $signatureString = $orderNumber . $amountInCents . $currency . $integritySecret;
+    $data['signature'] = hash('sha256', $signatureString);
+
+    // DEBUG: Log para verificar los valores concatenados
+    \Log::info("Wompi Integrity Check", [
+        'string' => $orderNumber . $amountInCents . $currency . 'SECRET_HIDDEN',
+        'hash' => $data['signature']
+    ]);
+
     return view('shop.checkout_redirect', $data);
 })->name('shop.checkout.redirect');

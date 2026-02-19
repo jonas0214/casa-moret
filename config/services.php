@@ -38,6 +38,7 @@ return [
     'wompi' => [
         'public_key' => env('WOMPI_PUBLIC_KEY'),
         'integrity_key' => env('WOMPI_INTEGRITY_KEY'),
+        'secret_key' => env('WOMPI_SECRET_KEY'),
     ],
 
 ];

@@ -78,9 +78,18 @@ class ShopController extends Controller
 
         session()->forget('cart');
 
+        // Generar Firma de Integridad para Wompi
+        $amountInCents = (int)($total * 100);
+        $currency = 'COP';
+        $integritySecret = config('services.wompi.integrity_key');
+        
+        $signatureString = $orderNumber . $amountInCents . $currency . $integritySecret;
+        $signature = hash('sha256', $signatureString);
+
         return view('shop.checkout_redirect', [
             'orderNumber' => $orderNumber,
             'total' => (int)$total,
+            'signature' => $signature,
             'customer' => $request->all()
         ]);
     }

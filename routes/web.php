@@ -39,3 +39,6 @@ Route::get('/checkout/redirect', function() {
 
     return view('shop.checkout_redirect', $data);
 })->name('shop.checkout.redirect');
+
+// Webhook Wompi
+Route::post('/webhooks/wompi', [\App\Http\Controllers\WompiController::class, 'webhook'])->name('wompi.webhook');
